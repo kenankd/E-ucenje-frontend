@@ -2,17 +2,15 @@ import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrl: './menu.component.css'
 })
-export class AppComponent {
+export class MenuComponent {
 
   constructor(private modalService: NgbModal) {}
-  title = 'e-ucenje';
 
   public open(modal: any): void {
     this.modalService.open(modal);
   }
-  
 }
