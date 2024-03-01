@@ -1,0 +1,16 @@
+.course-box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.course-img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.horizontal-line {
+    border-top: 2px solid #000;
+    margin: 20px 0; /* Adjust spacing around the line */
+}
