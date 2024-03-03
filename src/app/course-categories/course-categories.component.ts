@@ -12,19 +12,103 @@ export class CourseCategoriesComponent {
       departments: [
         {
           name: 'Računarstvo i informatika',
-          semesters: ['1. semestar', '2. semestar', '3. semestar', '4. semestar', '5. semestar', '6. semestar']
+          semesters: [
+            {
+            name: '1. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '2. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '3. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '4. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '5. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '6. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          }]
         },
         {
           name: 'Elektroenergetika',
-          semesters: ['1. semestar', '2. semestar', '3. semestar', '4. semestar', '5. semestar', '6. semestar']
+          semesters: [
+            {
+            name: '1. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '2. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '3. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '4. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '5. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '6. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          }]
         },
         {
           name: 'Telekomunikacije',
-          semesters: ['1. semestar', '2. semestar', '3. semestar', '4. semestar', '5. semestar', '6. semestar']
+          semesters: [
+            {
+            name: '1. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '2. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '3. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '4. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '5. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '6. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          }]
         },
          {
           name: 'Automatika i elektronika',
-          semesters: ['1. semestar', '2. semestar', '3. semestar', '4. semestar', '5. semestar', '6. semestar']
+          semesters: [
+            {
+            name: '1. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '2. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '3. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '4. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '5. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '6. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          }]
         }
       ],
     },
@@ -33,19 +117,103 @@ export class CourseCategoriesComponent {
       departments: [
         {
           name: 'Računarstvo i informatika',
-          semesters: ['7. semestar', '8. semestar', '9. semestar', '10. semestar']
+          semesters: [
+            {
+            name: '1. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '2. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '3. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '4. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '5. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '6. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          }]
         },
         {
           name: 'Elektroenergetika',
-          semesters: ['7. semestar', '8. semestar', '9. semestar', '10. semestar']
+          semesters: [
+            {
+            name: '1. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '2. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '3. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '4. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '5. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '6. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          }]
         },
         {
           name: 'Telekomunikacije',
-          semesters: ['7. semestar', '8. semestar', '9. semestar', '10. semestar']
+          semesters: [
+            {
+            name: '1. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '2. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '3. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '4. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '5. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '6. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          }]
         },
          {
           name: 'Automatika i elektronika',
-          semesters: ['7. semestar', '8. semestar', '9. semestar', '10. semestar']
+          semesters: [
+            {
+            name: '1. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '2. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '3. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '4. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },{
+            name: '5. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          },
+          {
+            name: '6. semestar',
+            courses : [ 'Uvod u programiranje', "IM1", "IF1", "LAG" ]
+          }]
         }
       ],
     }
@@ -55,6 +223,7 @@ export class CourseCategoriesComponent {
 
   toggle(id): void {
     this.expandedStates[id] = !this.expandedStates[id];
+    console.log(this.expandedStates);
   }
 
   isExpanded(id): boolean {

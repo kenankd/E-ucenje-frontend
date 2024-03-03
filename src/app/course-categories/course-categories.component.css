@@ -1,3 +1,13 @@
-i:hover{
-    text-decoration: underline;
-}
+
+
+.course-link {
+    color: black; /* Makes the text blue */
+    text-decoration: none; /* Removes underline from links */
+    transition: text-decoration 0.3s ease; /* Smooth transition for underline */
+  }
+  
+  .course-link:hover {
+    color:blue;
+    cursor: pointer;
+    text-decoration: underline; /* Adds underline on hover */
+  }
