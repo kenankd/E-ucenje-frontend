@@ -17,3 +17,8 @@
     text-decoration: underline;
     text-decoration-color: blue;
 }
+
+.nav-item .active {
+    border-bottom: 4px solid darkblue;
+    transition: box-shadow 1s ease-in-out; 
+}
