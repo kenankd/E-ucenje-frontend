@@ -1,0 +1,29 @@
+<div class="container mt-4">
+    <h1 class="display-4">ETF Courseware</h1>
+    <h2>Course Categories</h2>
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-outline-secondary mb-3" (click)="collapseAll()">Collapse All</button>
+    </div>
+    <div id="accordion">
+        <div *ngFor="let cycle of cycles; let i = index">
+            <div class="fw-bold d-flex align-items-center" (click)="toggle(i)">
+                <i [class]="isExpanded(i) ? 'bi bi-caret-down-fill' : 'bi bi-caret-right-fill'"></i>
+                {{cycle.name}}
+            </div>
+            <div *ngIf="isExpanded(i)" class="collapse show">
+                <div *ngFor="let department of cycle.departments">
+                    <div class="ms-3 fw-bold d-flex align-items-center" (click)="toggle(i + department.name)">
+                        <i
+                            [class]="isExpanded(i + department.name) ? 'bi bi-caret-down-fill' : 'bi bi-caret-right-fill'"></i>
+                        {{department.name}}
+                    </div>
+                    <div *ngIf="isExpanded(i + department.name)" class="collapse show">
+                        <ul class="ms-5 list-unstyled">
+                            <li *ngFor="let semester of department.semesters">{{semester}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
