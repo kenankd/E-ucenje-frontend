@@ -2,16 +2,14 @@
     cursor: pointer;
     background-color: transparent;
 }
+
 .card {
     background-color: white;
 }
 
-.section-title {
-    font-weight: bold;
-    text-align:left;
-    justify-content: left;
+h1 {
+    margin: 5% 0;
 }
-
 strong {
     font-size: 2rem;
     font-weight: 900;
@@ -34,30 +32,47 @@ strong:hover {
 .pdf-file {
     display: flex;
     align-items: center;
-    border: 1px solid #ccc; /* Add a border between each PDF file */
+    border: 1px solid #ccc;
+    border-radius: 10px;
     padding: 10px;
     margin-bottom: 1%;
-}
-
-.pdf-thumbnail {
-    width: 80px; /* Adjust thumbnail width */
-}
-
-.pdf-thumbnail img {
-    width: 100%;
-    height: auto;
+    width: 80%;
 }
 
 .pdf-details {
-    margin-left: 20px; /* Adjust margin as needed */
+    margin-left: 30px;
+    /* Adjust margin as needed */
 }
 
 .pdf-type {
-    font-weight: bold;
+    font-size: 0.8rem;
+    font-family: Arial, sans-serif;
+    color: #333;
+    /* Adjust color as needed */
 }
 
 .pdf-name {
-    margin-top: 5px; /* Add spacing between type and name */
+    font-size: 1.2rem;
+    margin-top: 5px;
+    color: #069;
+    cursor: pointer;
+    /* Add spacing between type and name */
 }
 
+.pdf-name:hover {
+    text-decoration: underline;
+}
 
+.pdf-img {
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #069;
+    width: 70px;
+    /* Adjust as needed */
+    height: 70px;
+    /* Adjust as needed */
+    border-radius: 5px;
+    padding: 1rem;
+}

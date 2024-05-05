@@ -1,0 +1,95 @@
+body, html{
+    background-color: gray;
+}
+
+
+:host {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh;
+    font-family: Arial, sans-serif;
+     /* Change the font family */
+  }
+  
+  .login-container {
+    max-width: 100%; /* Increase the max-width for better readability */ /* Adjust width as needed */
+    padding: 40px; /* Increase padding for better spacing */
+    border-radius: 20px; /* Increase border radius for rounded corners */
+    background-color: white(236, 232, 232);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-weight: bolder;
+    margin-bottom: 1rem; /* Increase margin for spacing */
+  }
+
+  h3 {
+    font-weight: bolder;
+    margin-bottom: 1rem; /* Increase margin for spacing */
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-size: 18px; /* Increase font size for labels */
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 15px; /* Increase padding for input fields */
+    font-size: 16px; /* Increase font size for input fields */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  
+  .btn {
+    padding: 9px 12px; /* Increase padding for buttons */
+    font-size: 18px; /* Increase font size for buttons */
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .btn-primary:hover{
+    background-color: darkblue;
+  }
+  
+  .btn-outline-secondary {
+    background-color: #f0f0f0;
+    color: rgb(88, 85, 85);
+    font-weight: 0;
+    border:0px;
+  }
+
+  .btn-outline-secondary:hover {
+    background-color: lightgray;
+  }
+  
+  .login-as-guest {
+    margin-top: 30px; /* Increase margin for spacing */
+    padding-top: 30px;
+    border-top: 1px solid #ccc;
+  }
+  
+  .login-as-guest h3 {
+    font-size: 24px; /* Increase font size for headings */
+    margin-bottom: 20px; /* Increase margin for spacing */
+  }
+  
+  #img-login {
+    max-width:20%;
+    max-height:50px;
+    text-align: center;
+  }
+
+  img{
+    height:200px;
+  }

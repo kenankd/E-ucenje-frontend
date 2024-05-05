@@ -7,6 +7,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { CoursesComponent } from './components/courses/courses.component';
 import { CourseCategoriesComponent } from './components/course-categories/course-categories.component';
 import { CourseDetailsComponent } from './components/course-details/course-details.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes : Routes = [
   {
@@ -14,6 +15,12 @@ const appRoutes : Routes = [
   },
   {
     path: "mycourses", component: CoursesComponent
+  },
+  {
+    path: "course", component: CourseDetailsComponent
+  },
+  {
+    path: "", redirectTo: "/home", pathMatch: "full"
   }
 ]
 
@@ -23,7 +30,8 @@ const appRoutes : Routes = [
     MenuComponent,
     CoursesComponent,
     CourseCategoriesComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

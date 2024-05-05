@@ -1,5 +1,5 @@
 <div class="container mt-3">
-    <h1 class="mb-3">{{ course.name }}</h1> <!-- Display course name -->
+    <h1 class="mb-5">{{ course.name }}</h1> <!-- Display course name -->
 
     <!-- Predavanja Section -->
     <div class="card border-0 mb-3">
@@ -14,7 +14,7 @@
         <div *ngIf="isExpanded('predavanja')" class="card-body">
             <div *ngFor="let pdf of predavanjaPDFs" class="pdf-file">
                 <div class="pdf-thumbnail">
-                    <img src="../../../assets/course.jpg" alt="PDF Icon" class="pdf-icon">
+                    <i class="pdf-img bi bi-file-earmark-arrow-down-fill"></i>
                 </div>
                 <div class="pdf-details">
                     <div class="pdf-type">FILE</div>
@@ -30,7 +30,7 @@
             <span class="d-flex align-items-center">
                 <img class="chevron" src="../../../assets/right-chevron.png" *ngIf="!isExpanded('vjezbe')">
                 <img class="chevron" src="../../../assets/down-chevron.png" *ngIf="isExpanded('vjezbe')">
-                <strong>Vjezbe</strong>
+                <strong>Vježbe</strong>
             </span>
         </div>
         <div *ngIf="isExpanded('vjezbe')" class="card-body">
