@@ -6,8 +6,6 @@
     background-color: rgba(0, 123, 255, 0.1);
 }
 
-
-
 .vertical-line {
     border-left: 1px solid #ddd;
     height: 40px;
@@ -18,7 +16,10 @@
     text-decoration-color: blue;
 }
 
+.navbar-nav .nav-item {
+    padding : 0 1 pt;
+}
 .nav-item .active {
-    border-bottom: 4px solid darkblue;
-    transition: box-shadow 1s ease-in-out; 
+    border-bottom: 2px solid darkblue;
+    transition: box-shadow 1s ease-in-out;
 }

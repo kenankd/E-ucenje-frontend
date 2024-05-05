@@ -1,0 +1,63 @@
+.card-header {
+    cursor: pointer;
+    background-color: transparent;
+}
+.card {
+    background-color: white;
+}
+
+.section-title {
+    font-weight: bold;
+    text-align:left;
+    justify-content: left;
+}
+
+strong {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+strong:hover {
+    background-color: lightgray;
+}
+
+.chevron {
+    width: 1.5rem;
+    height: auto;
+    margin-right: 1rem;
+}
+
+.chevron:hover {
+    background-color: lightgray;
+}
+
+.pdf-file {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc; /* Add a border between each PDF file */
+    padding: 10px;
+    margin-bottom: 1%;
+}
+
+.pdf-thumbnail {
+    width: 80px; /* Adjust thumbnail width */
+}
+
+.pdf-thumbnail img {
+    width: 100%;
+    height: auto;
+}
+
+.pdf-details {
+    margin-left: 20px; /* Adjust margin as needed */
+}
+
+.pdf-type {
+    font-weight: bold;
+}
+
+.pdf-name {
+    margin-top: 5px; /* Add spacing between type and name */
+}
+
+
