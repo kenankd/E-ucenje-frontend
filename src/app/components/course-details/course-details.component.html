@@ -12,13 +12,13 @@
             <button class="btn btn-outline-secondary" (click)="toggleAll()">{{collapseButtonText}}</button>
         </div>
         <div *ngIf="isExpanded('predavanja')" class="card-body">
-            <div *ngFor="let pdf of predavanjaPDFs" class="pdf-file">
-                <div class="pdf-thumbnail">
-                    <i class="pdf-img bi bi-file-earmark-arrow-down-fill"></i>
+            <div *ngFor="let pdf of predavanjaPDFs" class="section-item">
+                <div class="item-thumbnail">
+                    <i class="item-img pdf-img bi bi-file-earmark-arrow-down-fill"></i>
                 </div>
-                <div class="pdf-details">
-                    <div class="pdf-type">FILE</div>
-                    <i class="pdf-name">{{ pdf.name }}</i>
+                <div class="item-details">
+                    <div class="item-type">FILE</div>
+                    <i class="item-name">{{ pdf.name }}</i>
                 </div>
             </div>
         </div>
@@ -48,7 +48,15 @@
             </span>
         </div>
         <div *ngIf="isExpanded('kvizovi')" class="card-body">
-            <!-- Content for Kvizovi -->
+            <div *ngFor="let quiz of quizzes" class="section-item">
+                <div class="item-thumbnail">
+                    <img class="item-img quiz-img" src="../../../assets/quiz-icon.png" alt="" srcset="">
+                </div>
+                <div class="item-details" (click)="openQuizModal()">
+                    <div class="item-type">QUIZ</div>
+                    <i class="item-name">{{ quiz.name }}</i>
+                </div>
+            </div>
         </div>
     </div>
 </div>

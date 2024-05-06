@@ -10,6 +10,7 @@
 h1 {
     margin: 5% 0;
 }
+
 strong {
     font-size: 2rem;
     font-weight: 900;
@@ -29,7 +30,7 @@ strong:hover {
     background-color: lightgray;
 }
 
-.pdf-file {
+.section-item {
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
@@ -39,19 +40,18 @@ strong:hover {
     width: 80%;
 }
 
-.pdf-details {
+.item-details {
     margin-left: 30px;
-    /* Adjust margin as needed */
 }
 
-.pdf-type {
+.item-type {
     font-size: 0.8rem;
     font-family: Arial, sans-serif;
     color: #333;
     /* Adjust color as needed */
 }
 
-.pdf-name {
+.item-name {
     font-size: 1.2rem;
     margin-top: 5px;
     color: #069;
@@ -59,20 +59,33 @@ strong:hover {
     /* Add spacing between type and name */
 }
 
-.pdf-name:hover {
+.item-name:hover {
     text-decoration: underline;
 }
 
-.pdf-img {
+.item-img {
     font-size: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #069;
     width: 70px;
-    /* Adjust as needed */
     height: 70px;
-    /* Adjust as needed */
     border-radius: 5px;
     padding: 1rem;
+    cursor: pointer;
 }
+
+.pdf-img {
+    background-color: #069;
+}
+
+.quiz-img {
+    background-color: palevioletred;
+}
+
+/* ::ng-deep .quiz-modal {
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    z-index: 1000;
+} */

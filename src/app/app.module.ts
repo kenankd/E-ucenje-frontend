@@ -7,7 +7,10 @@ import { MenuComponent } from './components/menu/menu.component';
 import { CoursesComponent } from './components/courses/courses.component';
 import { CourseCategoriesComponent } from './components/course-categories/course-categories.component';
 import { CourseDetailsComponent } from './components/course-details/course-details.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
+import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const appRoutes : Routes = [
   {
@@ -18,6 +21,9 @@ const appRoutes : Routes = [
   },
   {
     path: "course", component: CourseDetailsComponent
+  },
+  {
+    path: "login", component: LoginComponent
   },
   {
     path: "", redirectTo: "/home", pathMatch: "full"
@@ -31,13 +37,17 @@ const appRoutes : Routes = [
     CoursesComponent,
     CourseCategoriesComponent,
     CourseDetailsComponent,
-    LoginComponent
+    LoginComponent,
+    QuizDetailsComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,  
+    MatDialogModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    provideAnimationsAsync()
+  ],
 })
 export class AppModule { }

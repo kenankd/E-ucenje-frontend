@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { QuizDetailsComponent } from '../quiz-details/quiz-details.component';
 
 @Component({
     selector: 'app-course-details',
@@ -6,6 +8,7 @@ import { Component } from '@angular/core';
     styleUrl: './course-details.component.css'
 })
 export class CourseDetailsComponent {
+    constructor(public dialog: MatDialog) { }
     course = { name: 'Tehnike programiranja' };
     collapseButtonText: string = 'Expand All';
     sections = {
@@ -16,6 +19,11 @@ export class CourseDetailsComponent {
     predavanjaPDFs = [
         { name: 'Predavanje 1 - uvod', url: 'path/to/pdf1' },
         { name: 'Lecture Notes 2.pdf', url: 'path/to/pdf2' }
+    ];
+
+    quizzes = [
+        { name: 'Quiz 1' },
+        { name: 'Quiz 2' }
     ];
 
     toggleSection(section: string) {
@@ -39,5 +47,18 @@ export class CourseDetailsComponent {
         }
         this.collapseButtonText = this.collapseButtonText === 'Collapse All' ? 'Expand All' : 'Collapse All';
     }
-}
 
+    openQuizModal(): void {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.width = '600px';
+        dialogConfig.height = '400px';
+        dialogConfig.panelClass = 'quiz-modal';
+
+        const dialogRef = this.dialog.open(QuizDetailsComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+        });
+    }
+}
