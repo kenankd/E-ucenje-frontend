@@ -1,53 +1,19 @@
-.quiz-section {
-  width: 100%;
-  height:100%;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 20px;
+.card {
+  border: 1px solid #ddd;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
+.card-body{
+  background-color: #c4f8ea;
 }
 
-.header img {
-  width: 50px;
-  /* Adjust the size of the image */
-  height: 50px;
-  margin-right: 10px;
+.quiz-img {
+  font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    padding: 1rem;
+    background-color: palevioletred;
 }
-
-.title {
-  flex: 1;
-}
-
-.title h3 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.title p {
-  margin: 0;
-  font-size: 16px;
-  color: #555;
-}
-
-.start-quiz-btn {
-  padding: 10px 20px;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-}
-
-.start-quiz-btn:hover {
-  background-color: #0056b3;
-}
-

@@ -10,3 +10,7 @@
     cursor: pointer;
     text-decoration: underline; /* Adds underline on hover */
   }
+
+  i, li {
+    font-size: larger;
+  }
