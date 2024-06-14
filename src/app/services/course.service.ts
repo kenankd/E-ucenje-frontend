@@ -18,4 +18,12 @@ export class CourseService {
   getCourse(id: number) : Observable<Course> {
     return this.http.get<Course>(`http://localhost:3000/course/${id}`);
   }
+
+  getMaterials(id: number) : Observable<any> {
+    return this.http.get(`http://localhost:3000/course/${id}/materials`);
+  }
+
+  getFile(id: number) : Observable<any> {
+    return this.http.get(`http://localhost:3000/material/${id}/file`, {responseType: 'blob' as 'json'});
+  }
 }

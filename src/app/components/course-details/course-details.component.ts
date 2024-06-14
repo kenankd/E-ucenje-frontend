@@ -14,18 +14,8 @@ export class CourseDetailsComponent implements OnInit {
     constructor(public dialog: MatDialog, private quizService: QuizService, private courseService: CourseService, private route: ActivatedRoute) { }
     quizzes = [];
     course: Course;
-
-    ngOnInit() {
-        const id = +this.route.snapshot.paramMap.get('id');
-        this.courseService.getCourse(id).subscribe((data: Course) => {
-            this.course = data;
-        });
-        this.quizService.getQuizzes().subscribe(
-            (data: any[]) => {
-                this.quizzes = data;
-            }
-        );
-    }
+    predavanja: any[] = [];
+    vjezbe: any[] = [];
 
     collapseButtonText: string = 'Expand All';
     sections = {
@@ -33,10 +23,26 @@ export class CourseDetailsComponent implements OnInit {
         vjezbe: false,
         kvizovi: false
     };
-    predavanjaPDFs = [
-        { name: 'Predavanje 1 - uvod', url: 'path/to/pdf1' },
-        { name: 'Lecture Notes 2.pdf', url: 'path/to/pdf2' }
-    ];
+
+    ngOnInit() {
+        const id = +this.route.snapshot.paramMap.get('id');
+        this.courseService.getCourse(id).subscribe((data: Course) => {
+            this.course = data;
+        });
+
+        this.courseService.getMaterials(id).subscribe((data: any) => {
+            this.predavanja = data.filter((item: any) => item.type === 'predavanje');
+            this.vjezbe = data.filter((item: any) => item.type === 'vjezba');
+        });
+
+        this.quizService.getQuizzes().subscribe(
+            (data: any[]) => {
+                this.quizzes = data;
+            }
+        );
+
+    }
+
 
     openQuizModal(quiz: any): void {
         const dialogConfig = new MatDialogConfig();
@@ -50,6 +56,19 @@ export class CourseDetailsComponent implements OnInit {
             //TODO snackbar
             console.log('The dialog was closed');
         });
+    }
+
+    openFile(material: any): void {
+        this.courseService.getFile(material.id).subscribe((data: Blob) => {
+            const url = URL.createObjectURL(data);
+            const link = document.createElement('a');
+            link.href = url;
+            link.target = '_blank';
+            link.download = data + '.pdf'; // Ensure the file opens as PDF
+            link.click();
+            URL.revokeObjectURL(url);
+        });
+
     }
 
     toggleSection(section: string) {

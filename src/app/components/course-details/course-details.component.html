@@ -12,13 +12,13 @@
             <button class="btn btn-outline-secondary" (click)="toggleAll()">{{collapseButtonText}}</button>
         </div>
         <div *ngIf="isExpanded('predavanja')" class="card-body">
-            <div *ngFor="let pdf of predavanjaPDFs" class="section-item">
+            <div *ngFor="let predavanje of predavanja" class="section-item">
                 <div class="item-thumbnail">
                     <i class="item-img pdf-img bi bi-file-earmark-arrow-down-fill"></i>
                 </div>
                 <div class="item-details">
                     <div class="item-type">FILE</div>
-                    <i class="item-name">{{ pdf.name }}</i>
+                    <i class="item-name" (click)="openFile(predavanje)">{{ predavanje?.name }}</i>
                 </div>
             </div>
         </div>
@@ -33,6 +33,15 @@
             </span>
         </div>
         <div *ngIf="isExpanded('vjezbe')" class="card-body">
+            <div *ngFor="let vjezba of vjezbe" class="section-item">
+                <div class="item-thumbnail">
+                    <i class="item-img pdf-img bi bi-file-earmark-arrow-down-fill"></i>
+                </div>
+                <div class="item-details">
+                    <div class="item-type">FILE</div>
+                    <i class="item-name" (click)="openFile(vjezba)">{{ vjezba?.name }}</i>
+                </div>
+            </div>
         </div>
     </div>
 
