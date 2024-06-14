@@ -20,7 +20,7 @@
         <div class="col-10">
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Pretraži</button>
+                <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
         <div class="col-1">
@@ -31,25 +31,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 course" *ngFor="let course of courses">
             <div class="card course-box">
-                <img src="../../assets/course.jpg" alt="Course Image" class="course-img">
-                <h3>Razvoj mobilnih aplikacija</h3>
-                <p>4. semestar</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="course-box">
-                <img src="../../assets/course.jpg" alt="Course Image" class="course-img">
-                <h3>Course Name</h3>
-                <p>Some description or details about the course.</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="course-box">
-                <img src="../../assets/course.jpg" alt="Course Image" class="course-img">
-                <h3>Course Name</h3>
-                <p>Some description or details about the course.</p>
+                <img src="../../assets/course.jpg" alt="Course Image" class="course-img" (click)="navigateToCourse(course.id)">
+                <h3>{{course.name}}</h3>
+                <p>2. semestar</p>
             </div>
         </div>
     </div>

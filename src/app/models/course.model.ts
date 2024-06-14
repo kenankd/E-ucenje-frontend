@@ -1,3 +1,3 @@
-export class CourseModel{
-    constructor (private id : number, private name: string, private summary: string) {}
+export class Course{
+    constructor (public id : number, public name: string, public description: string) {}
 }

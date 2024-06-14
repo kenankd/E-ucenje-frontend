@@ -11,6 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const appRoutes : Routes = [
   {
@@ -20,7 +22,7 @@ const appRoutes : Routes = [
     path: "mycourses", component: CoursesComponent
   },
   {
-    path: "course", component: CourseDetailsComponent
+    path: "course/:id", component: CourseDetailsComponent
   },
   {
     path: "login", component: LoginComponent
@@ -43,6 +45,8 @@ const appRoutes : Routes = [
   imports: [
     BrowserModule,  
     MatDialogModule,
+    HttpClientModule,
+    MatSnackBarModule,
     RouterModule.forRoot(appRoutes)
   ],
   bootstrap: [AppComponent],

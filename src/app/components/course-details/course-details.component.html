@@ -1,7 +1,7 @@
 <div class="container mt-3">
-    <h1 class="mb-5">{{ course.name }}</h1> <!-- Display course name -->
+    <h1 class="mb-5">{{ course?.name }}</h1>
 
-    <!-- Predavanja Section -->
+    
     <div class="card border-0 mb-3">
         <div class="card-header d-flex align-items-center justify-content-between">
             <span class="d-flex align-items-center" (click)="toggleSection('predavanja')">
@@ -24,7 +24,6 @@
         </div>
     </div>
 
-    <!-- Vjezbe Section -->
     <div class="card border-0 mb-3">
         <div class="card-header d-flex align-items-center justify-content-between" (click)="toggleSection('vjezbe')">
             <span class="d-flex align-items-center">
@@ -34,11 +33,9 @@
             </span>
         </div>
         <div *ngIf="isExpanded('vjezbe')" class="card-body">
-            <!-- Content for Vjezbe -->
         </div>
     </div>
 
-    <!-- Kvizovi Section -->
     <div class="card border-0 mb-3">
         <div class="card-header d-flex align-items-center justify-content-between" (click)="toggleSection('kvizovi')">
             <span class="d-flex align-items-center">

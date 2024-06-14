@@ -1,14 +1,21 @@
-import { CourseModel } from "../models/course.model";
+import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Course } from '../models/course.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-
+@Injectable({
+  providedIn: 'root'
+})
 export class CourseService {
-    
-    courses : CourseModel[] = [
-        new CourseModel(1,"Tp","AA"),
-        new CourseModel(2,"aa","bb")
-    ];
 
-    getCourses() {
-        return this.courses;
-    }
+  constructor(private http: HttpClient) { }
+
+  getCourses() : Observable<Course[]> {
+    return this.http.get<Course[]>('http://localhost:3000/course');
+  }
+
+  getCourse(id: number) : Observable<Course> {
+    return this.http.get<Course>(`http://localhost:3000/course/${id}`);
+  }
 }
