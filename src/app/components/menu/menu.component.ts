@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,9 +9,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MenuComponent {
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private router: Router) {}
 
   public open(modal: any): void {
     this.modalService.open(modal);
+  }
+
+  openLogin(){
+    this.router.navigate(['login']);
   }
 }

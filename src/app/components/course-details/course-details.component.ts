@@ -50,6 +50,7 @@ export class CourseDetailsComponent implements OnInit {
         dialogConfig.height = '400px';
         dialogConfig.panelClass = 'quiz-modal';
         dialogConfig.data = { quiz };
+        console.log(dialogConfig.data);
         const dialogRef = this.dialog.open(QuizDetailsComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe(result => {

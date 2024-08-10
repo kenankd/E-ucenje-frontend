@@ -54,15 +54,33 @@
             </span>
         </div>
         <div *ngIf="isExpanded('kvizovi')" class="card-body">
-            <div *ngFor="let quiz of quizzes" class="section-item">
+            <div *ngFor="let quiz of quizzes" class="section-item d-flex justify-content-between align-items-center">
                 <div class="item-thumbnail">
-                    <img class="item-img quiz-img" src="../../../assets/quiz-icon.png" alt="" srcset="">
+                    <img class="item-img quiz-img" src="../../../assets/quiz-icon.png" alt="Quiz Icon">
                 </div>
-                <div class="item-details" (click)="openQuizModal()">
+                <div class="item-details flex-grow-1" (click)="openQuizModal(quiz)">
                     <div class="item-type">QUIZ</div>
                     <i class="item-name">{{ quiz.name }}</i>
                 </div>
+                
+                <!-- Prikaz rezultata na desnoj strani -->
+                <div *ngIf="quiz.score !== null" class="quiz-result text-end ms-auto">
+                    <div class="score">
+                        Score: {{ quiz.score }} / {{ quiz.maxScore }}
+                    </div>
+                    
+                    <div *ngIf="quiz.score < quiz.minScore" class="failed text-center p-2 bg-danger text-white mt-2">
+                        FAILED
+                    </div>
+                    <div *ngIf="quiz.score >= quiz.minScore" class="passed text-center p-2 bg-success text-white mt-2">
+                        PASSED
+                    </div>
+                </div>
+
+                
             </div>
+            
+            
         </div>
     </div>
 </div>

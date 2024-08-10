@@ -16,6 +16,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const appRoutes : Routes = [
   {
+    path: "", redirectTo: "/home", pathMatch: "full"
+  },
+  {
     path: "home", component: CourseCategoriesComponent
   },
   {
@@ -26,10 +29,8 @@ const appRoutes : Routes = [
   },
   {
     path: "login", component: LoginComponent
-  },
-  {
-    path: "", redirectTo: "/home", pathMatch: "full"
   }
+  
 ]
 
 @NgModule({
