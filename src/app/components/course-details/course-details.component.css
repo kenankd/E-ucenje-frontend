@@ -16,8 +16,8 @@ strong {
     font-weight: 900;
 }
 
-strong:hover {
-    background-color: lightgray;
+strong:hover, em:hover {
+    cursor: pointer;
 }
 
 .chevron {
@@ -26,8 +26,21 @@ strong:hover {
     margin-right: 1rem;
 }
 
-.chevron:hover {
+.eye {
+    margin-right: 0.5rem;
+}
+
+.eye:hover {
+    cursor: pointer;
+}
+
+.chevron:hover{
     background-color: lightgray;
+    cursor: pointer;
+}
+
+.chevron-hidden:hover{
+    cursor: pointer;
 }
 
 .section-item {

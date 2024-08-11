@@ -11,8 +11,11 @@ import { LoginComponent } from './components/login/login.component';
 import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatDialogModule } from '@angular/material/dialog';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms'; 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthInterceptor } from './services/auth.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes : Routes = [
   {
@@ -22,10 +25,10 @@ const appRoutes : Routes = [
     path: "home", component: CourseCategoriesComponent
   },
   {
-    path: "mycourses", component: CoursesComponent
+    path: "mycourses", component: CoursesComponent, canActivate: [AuthGuard]
   },
   {
-    path: "course/:id", component: CourseDetailsComponent
+    path: "course/:id", component: CourseDetailsComponent, canActivate: [AuthGuard]
   },
   {
     path: "login", component: LoginComponent
@@ -48,11 +51,13 @@ const appRoutes : Routes = [
     MatDialogModule,
     HttpClientModule,
     MatSnackBarModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   bootstrap: [AppComponent],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
 })
 export class AppModule { }

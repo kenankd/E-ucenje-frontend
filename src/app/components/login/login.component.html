@@ -2,12 +2,17 @@
   <div class="login-container">
     <h2>Log in to ETF Courseware</h2>
     <div class="form-group">
-      <input type="text" id="username" name="username" class="form-control" placeholder="Username or email">
+      <input type="text" id="username" name="username" class="form-control" placeholder="Username"
+        [(ngModel)]="username">
     </div>
     <div class="form-group">
-      <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+        [(ngModel)]="password">
     </div>
-    <button class="btn btn-primary btn-lg">Log in</button>
+    <button class="btn btn-primary btn-lg" (click)="login()">Log in</button>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
+      {{ errorMessage }}
+    </div>
     <div class="login-as-guest">
       <h3>Some courses may allow guest access</h3>
       <button class="btn btn-outline-secondary btn-block">Log in as a guest</button>

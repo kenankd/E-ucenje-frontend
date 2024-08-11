@@ -23,3 +23,13 @@
     border-bottom: 2px solid #069;
     transition: box-shadow 1s ease-in-out;
 }
+
+li {
+    list-style-type: none;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    cursor: pointer;
+
+}
