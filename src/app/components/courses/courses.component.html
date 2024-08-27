@@ -31,9 +31,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4 course" *ngFor="let course of courses">
+        <div class="col-md-4 course" *ngFor="let course of courses" (click)="navigateToCourse(course.id)">
             <div class="card course-box">
-                <img src="../../assets/course.jpg" alt="Course Image" class="course-img" (click)="navigateToCourse(course.id)">
+                <img src="../../assets/course.jpg" alt="Course Image" class="course-img" >
                 <h3>{{course.name}}</h3>
                 <p>2. semestar</p>
             </div>

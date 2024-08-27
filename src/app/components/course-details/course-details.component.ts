@@ -2,21 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { QuizDetailsComponent } from '../quiz-details/quiz-details.component';
 import { QuizService } from '../../services/quiz.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from '../../models/course.model';
 import { CourseService } from '../../services/course.service';
+import { QuizRetakeService } from '../../services/quiz-retake.service';
 @Component({
     selector: 'app-course-details',
     templateUrl: './course-details.component.html',
     styleUrl: './course-details.component.css'
 })
 export class CourseDetailsComponent implements OnInit {
-    constructor(public dialog: MatDialog, private quizService: QuizService, private courseService: CourseService, private route: ActivatedRoute) { }
+    constructor(public dialog: MatDialog, private quizService: QuizService, private courseService: CourseService, private route: ActivatedRoute, private router: Router, private quizRetakeService: QuizRetakeService) { }
     quizzes = [];
     course: Course;
     predavanja: any[] = [];
     vjezbe: any[] = [];
-
+    passedPredavanja: number
+    passedVjezbe: number
     collapseButtonText: string = 'Expand All';
     sections = {
         predavanja: false,
@@ -33,6 +35,9 @@ export class CourseDetailsComponent implements OnInit {
         this.courseService.getMaterials(id).subscribe((data: any) => {
             this.predavanja = data.filter((item: any) => item.type === 'predavanje');
             this.vjezbe = data.filter((item: any) => item.type === 'vjezba');
+            this.passedPredavanja = this.predavanja.filter(item => item.passed ===  true).length
+            this.passedVjezbe= this.vjezbe.filter(item => item.passed ===  true).length
+
         });
 
         this.quizService.getQuizzes().subscribe(
@@ -41,10 +46,16 @@ export class CourseDetailsComponent implements OnInit {
             }
         );
 
+        this.quizRetakeService.retakeQuiz$.subscribe(quiz => {
+            console.log("rrrr")
+            this.openQuizModal(this.quizzes[0])
+        });
+
     }
 
 
     openQuizModal(quiz: any): void {
+        console.log("opened")
         const dialogConfig = new MatDialogConfig();
         dialogConfig.width = '600px';
         dialogConfig.height = '400px';
@@ -57,6 +68,11 @@ export class CourseDetailsComponent implements OnInit {
             //TODO snackbar
             console.log('The dialog was closed');
         });
+    }
+
+    openQuizReview(quiz: any): void {
+        console.log("aa")
+        this.router.navigate(['/quiz/review']);
     }
 
     openFile(material: any): void {

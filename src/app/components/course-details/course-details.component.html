@@ -31,7 +31,7 @@
                     <span class="d-flex align-items-center" (click)="toggleSection('skrivenaPredavanja')">
                         <i class="bi bi-eye-slash eye fs-2" *ngIf="!isExpanded('skrivenaPredavanja')"></i>
                         <i class="bi bi-eye eye fs-2" *ngIf="isExpanded('skrivenaPredavanja')"> </i>
-                        <em>Hidden</em>
+                        <em>Hidden ({{passedPredavanja}} items)</em>
                     </span>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                     <span class="d-flex align-items-center" (click)="toggleSection('skriveneVjezbe')">
                         <i class="bi bi-eye-slash eye fs-2" *ngIf="!isExpanded('skriveneVjezbe')"></i>
                         <i class="bi bi-eye eye fs-2" *ngIf="isExpanded('skriveneVjezbe')"> </i>
-                        <em>Hidden</em>
+                        <em>Hidden ({{ passedVjezbe}} items) </em>
                     </span>
                 </div>
             </div>
@@ -113,7 +113,7 @@
                 <div class="item-thumbnail">
                     <img class="item-img quiz-img" src="../../../assets/quiz-icon.png" alt="Quiz Icon">
                 </div>
-                <div class="item-details flex-grow-1" (click)="openQuizModal(quiz)">
+                <div class="item-details flex-grow-1" (click)="quiz.score !== null ? openQuizReview(quiz) : openQuizModal(quiz)"                >
                     <div class="item-type">QUIZ</div>
                     <i class="item-name">{{ quiz.name }}</i>
                 </div>
