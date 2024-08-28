@@ -1,0 +1,67 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">{{quizReview.quizName}} Review</h5>
+        </div>
+        <div class="card-body">
+            <!-- Exam details table -->
+            <table class="table table-bordered mb-4">
+                <tbody>
+                    <tr>
+                        <td class="label-cell">Started on</td>
+                        <td>{{ quizReview.startedOn }}</td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">Time taken</td>
+                        <td>3 mins 10 secs</td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">Grade</td>
+                        <td>0.8 out of 1.00 (80%)</td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">State</td>
+                        <td>Passed</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Loop through questions -->
+            <div *ngFor="let question of quizReview.review; let i = index" class="question-section mb-4 p-3 rounded">
+                <div class="row">
+                    <!-- Left side box -->
+                    <div class="col-md-3">
+                        <div class="gray-box">
+                            <h6>Question {{i}}</h6>
+                            <p><strong>Mark:</strong> 0.2 out of 2.3</p>
+                            <span [ngClass]="question.correct ? 'badge bg-success' : 'badge bg-danger'">
+                                {{ question.correct ? 'Correct' : 'Incorrect' }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Right side question details -->
+                    <div class="col-md-9">
+                        <p class="text-muted">{{ question.text }}</p>
+                        <ul>
+                            <li *ngFor="let option of question.options">
+                                {{ option.text }}
+                                <span *ngIf="option.correct" class="text-success">✔</span>
+                                <span *ngIf="!option.correct && !question.correct" class="text-danger">✘</span>
+                            </li>
+                        </ul>
+                        <p *ngIf="!question.correct" class="correct-answer">
+                            <em>The correct answer is: {{ question.correctAnswer }}</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+                <button class="btn btn-success" (click)="retakeQuiz()">Retake Quiz</button>
+                <button class="btn btn-primary" (click)="finishReview()">Finish Review</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -72,7 +72,7 @@ export class CourseDetailsComponent implements OnInit {
 
     openQuizReview(quiz: any): void {
         console.log("aa")
-        this.router.navigate(['/quiz/review']);
+        this.router.navigate([`/quiz/${quiz.id}/review`]);
     }
 
     openFile(material: any): void {

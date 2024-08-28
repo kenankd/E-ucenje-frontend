@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthGuard } from './guards/auth.guard';
-import { QuizReviewComponent } from './quiz-review/quiz-review.component';
+import { QuizReviewComponent } from './components/quiz-review/quiz-review.component';
 
 const appRoutes : Routes = [
   {
@@ -35,7 +35,7 @@ const appRoutes : Routes = [
     path: "login", component: LoginComponent
   },
   {
-    path: "quiz/review", component: QuizReviewComponent, canActivate: [AuthGuard]
+    path: "quiz/:id/review", component: QuizReviewComponent, canActivate: [AuthGuard]
   }
   
 ]
