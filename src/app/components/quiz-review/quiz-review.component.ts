@@ -20,58 +20,6 @@ export class QuizReviewComponent implements OnInit {
   quizReview: QuizReview
   quizId = +this.route.snapshot.paramMap.get('id');
   user = this.authService.getUserInfo()
-  examDetails = {
-    startedOn: '6 June 2024, 9:45 AM',
-    state: 'Passed',
-    timeTaken: '3 mins 10 secs',
-    grade: '0.80 out of 1.00 (80%)'
-  };
-  //TODO ADD TO ROUTE SCORE I CORRECT U QUESTION
-
-  questions = [
-    {
-      number: 1,
-      correct: false,
-      mark: 0.00,
-      outOf: 0.20,
-      text: 'Koju ulogu u proceduri digitalnog potpisivanja ima privatni ključ potpisnika?',
-      options: [
-        { text: 'Osigurava da je potpis mogao napraviti samo onaj tko ima taj ključ', correct: false },
-        { text: 'Osigurava povjerljivost sadržaja', correct: true }
-      ],
-      correctAnswer: 'Osigurava povjerljivost sadržaja'
-    },
-    {
-      number: 2,
-      correct: true,
-      mark: 0.20,
-      outOf: 0.20,
-      text: 'Koja je jedina tajna informacija koja se razmjenjuje između TLS klijenta i servera?',
-      options: [
-        { text: 'Premaster secret (key)', correct: true },
-        { text: 'Privatni ključ servera', correct: false },
-        { text: 'Serverski certifikat', correct: false },
-        { text: 'Privatni ključ klijenta', correct: false }
-      ],
-      correctAnswer: 'Premaster secret (key)'
-    },
-    {
-      number: 3,
-      correct: true,
-      mark: 0.20,
-      outOf: 0.20,
-      text: 'Koja je jedina tajna informacija koja se razmjenjuje između TLS klijenta i servera?',
-      options: [
-        { text: 'Premaster secret (key)', correct: true },
-        { text: 'Privatni ključ servera', correct: false },
-        { text: 'Serverski certifikat', correct: false },
-        { text: 'Privatni ključ klijenta', correct: false }
-      ],
-      correctAnswer: 'Serverski certifikat'
-    }
-  ];
-
-
 
   ngOnInit(): void {
 
@@ -87,22 +35,34 @@ export class QuizReviewComponent implements OnInit {
   retakeQuiz(): void {
     this.quizRetakeService.notifyRetakeQuiz()
     this.router.navigate(["/course/1"])
-    
+
     //TODO
     //FIX 1 HARDCODED COURSE ID
+  }
+
+  isAnswerCorrect(question: QuizReviewQuestion) {
+    return question.answers.some(answer => answer.isCorrect && answer.isSelected)
+  }
+
+  getCorrectAnswer(question: QuizReviewQuestion): QuizReviewAnswer {
+    return question.answers.find(answer => answer.isCorrect && answer.isSelected)
+  }
+
+  displayTimeTaken() {
+    const mins = this.quizReview.time * 60 % 60
+    let secs = 0
+    if (mins == 0) {
+      secs = this.quizReview.time % 60
+    }
+    else {
+      secs = this.quizReview.time - mins * 60
+    }
+    return `${mins} mins ${secs} secs`
   }
 
   displayQuizScore() {
     const percentage = this.quizReview.score / this.quizReview.maxScore * 100
     return `${this.quizReview.score}.00 out of ${this.quizReview.maxScore}.00 (${percentage}%)`
-  }
-
-  isAnswerCorrect(question: QuizReviewQuestion){
-    return question.answers.some(answer => answer.isCorrect && answer.isSelected)
-  }
-
-  getCorrectAnswer(question: QuizReviewQuestion) : QuizReviewAnswer{
-    return question.answers.find(answer => answer.isCorrect && answer.isSelected)
   }
 
   displayQuestionScore(question: QuizReviewQuestion) {
