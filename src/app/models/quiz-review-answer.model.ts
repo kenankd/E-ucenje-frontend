@@ -1,7 +1,6 @@
 export interface QuizReviewAnswer {
-    id: number;
-    text: string;
-    isCorrect: boolean;
-    isSelected: boolean;
-  }
-  
+  id: number;
+  text: string;
+  isCorrect: boolean;
+  isSelected: boolean;
+}

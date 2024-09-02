@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { QuizReview } from '../../models/quiz-review.model';
 import { QuizService } from '../../services/quiz.service';
 import { AuthService } from '../../services/auth.service';
+import { QuizReviewQuestion } from '../../models/quiz-review-question.model';
+import { QuizReviewAnswer } from '../../models/quiz-review-answer.model';
 
 @Component({
   selector: 'app-quiz-review',
@@ -85,8 +87,28 @@ export class QuizReviewComponent implements OnInit {
   retakeQuiz(): void {
     this.quizRetakeService.notifyRetakeQuiz()
     this.router.navigate(["/course/1"])
-
+    
     //TODO
     //FIX 1 HARDCODED COURSE ID
+  }
+
+  displayQuizScore() {
+    const percentage = this.quizReview.score / this.quizReview.maxScore * 100
+    return `${this.quizReview.score}.00 out of ${this.quizReview.maxScore}.00 (${percentage}%)`
+  }
+
+  isAnswerCorrect(question: QuizReviewQuestion){
+    return question.answers.some(answer => answer.isCorrect && answer.isSelected)
+  }
+
+  getCorrectAnswer(question: QuizReviewQuestion) : QuizReviewAnswer{
+    return question.answers.find(answer => answer.isCorrect && answer.isSelected)
+  }
+
+  displayQuestionScore(question: QuizReviewQuestion) {
+    if (this.isAnswerCorrect(question)) {
+      return `${question.points} out of ${question.points}`
+    }
+    return `0 out of $${question.points}`
   }
 }

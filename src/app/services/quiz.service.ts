@@ -17,8 +17,8 @@ export class QuizService {
     return this.http.get(`http://localhost:3000/quiz/${id}/content`);
   }
 
-  submitQuiz(quizId: number, userId: number,  answers: any[]): Observable<any> {
-    return this.http.post(`http://localhost:3000/quiz/${quizId}/user/${userId}/submit`, { answers });
+  submitQuiz(quizId: number, userId: number,  answers: any[], time: any): Observable<any> {
+    return this.http.post(`http://localhost:3000/quiz/${quizId}/user/${userId}/submit`, { answers, time});
   }
 
   getQuizReview(id: number, userId: number): Observable<QuizReview> {

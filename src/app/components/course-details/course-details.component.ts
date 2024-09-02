@@ -63,7 +63,6 @@ export class CourseDetailsComponent implements OnInit {
         dialogConfig.data = { quiz };
         console.log(dialogConfig.data);
         const dialogRef = this.dialog.open(QuizDetailsComponent, dialogConfig);
-
         dialogRef.afterClosed().subscribe(result => {
             //TODO snackbar
             console.log('The dialog was closed');

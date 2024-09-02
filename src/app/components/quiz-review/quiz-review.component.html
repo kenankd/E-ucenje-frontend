@@ -9,19 +9,19 @@
                 <tbody>
                     <tr>
                         <td class="label-cell">Started on</td>
-                        <td>{{ quizReview.startedOn }}</td>
+                        <td>{{ quizReview.startedOn | date:'fullDate'}} at {{quizReview.startedOn | date:'shortTime' }}</td>
                     </tr>
                     <tr>
                         <td class="label-cell">Time taken</td>
-                        <td>3 mins 10 secs</td>
+                        <td>{{quizReview.time}} secs</td>
                     </tr>
                     <tr>
                         <td class="label-cell">Grade</td>
-                        <td>0.8 out of 1.00 (80%)</td>
+                        <td>{{displayQuizScore()}}</td>
                     </tr>
                     <tr>
                         <td class="label-cell">State</td>
-                        <td>Passed</td>
+                        <td>{{quizReview.state}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -32,25 +32,25 @@
                     <!-- Left side box -->
                     <div class="col-md-3">
                         <div class="gray-box">
-                            <h6>Question {{i}}</h6>
-                            <p><strong>Mark:</strong> 0.2 out of 2.3</p>
-                            <span [ngClass]="question.correct ? 'badge bg-success' : 'badge bg-danger'">
-                                {{ question.correct ? 'Correct' : 'Incorrect' }}
+                            <h6>Question {{i+1}}</h6>
+                            <p><strong>Mark:</strong> {{displayQuestionScore(question)}}</p>
+                            <span [ngClass]="isAnswerCorrect(question) ? 'badge bg-success' : 'badge bg-danger'">
+                                {{ isAnswerCorrect(question) ? 'Correct' : 'Incorrect' }}
                             </span>
                         </div>
                     </div>
 
                     <!-- Right side question details -->
                     <div class="col-md-9">
-                        <p class="text-muted">{{ question.text }}</p>
+                        <p class="text-muted">{{ question.question }}</p>
                         <ul>
-                            <li *ngFor="let option of question.options">
-                                {{ option.text }}
-                                <span *ngIf="option.correct" class="text-success">✔</span>
-                                <span *ngIf="!option.correct && !question.correct" class="text-danger">✘</span>
+                            <li *ngFor="let answer of question.answers">
+                                {{ answer.text }}
+                                <span *ngIf="answer.isCorrect" class="text-success">✔</span>
+                                <span *ngIf="!answer.isCorrect && answer.isSelected" class="text-danger">✘</span>
                             </li>
                         </ul>
-                        <p *ngIf="!question.correct" class="correct-answer">
+                        <p *ngIf="!isAnswerCorrect(question)" class="correct-answer">
                             <em>The correct answer is: {{ question.correctAnswer }}</em>
                         </p>
                     </div>

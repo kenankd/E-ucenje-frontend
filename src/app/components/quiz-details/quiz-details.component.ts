@@ -28,7 +28,7 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
       this.questions = data.Questions;
       this.question = this.questions[this.currentQuestionIndex];
     });
-
+    console.log(data.quiz.time)
     // Postavljanje vremena u sekundama (minuti * 60)
     this.timeLeft = data.quiz.time * 60;
   }
@@ -79,7 +79,9 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
 
   submitQuiz() {
     this.answers.push(this.answer);
-    this.quizService.submitQuiz(this.data.quiz.id, 1, this.answers).subscribe({});
+    console.log(this.data.quiz.time, this.timeLeft)
+    const timeTaken = this.data.quiz.time * 60 - this.timeLeft
+    this.quizService.submitQuiz(this.data.quiz.id, 1, this.answers, timeTaken).subscribe({});
     this.dialogRef.close();
     this.notificationService.showSuccess('Quiz submitted successfully');
   }
