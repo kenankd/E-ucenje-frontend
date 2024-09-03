@@ -69,6 +69,6 @@ export class QuizReviewComponent implements OnInit {
     if (this.isAnswerCorrect(question)) {
       return `${question.points} out of ${question.points}`
     }
-    return `0 out of $${question.points}`
+    return `0 out of ${question.points}`
   }
 }
