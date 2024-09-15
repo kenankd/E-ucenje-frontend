@@ -1,7 +1,7 @@
 <div class="container mt-3">
     <h1 class="mb-5">{{ course?.name }}</h1>
 
-
+    <!-- Predavanja Section -->
     <div class="card border-0 mb-3">
         <div class="card-header d-flex align-items-center justify-content-between">
             <span class="d-flex align-items-center" (click)="toggleSection('predavanja')">
@@ -12,33 +12,34 @@
             <button class="btn btn-outline-secondary" (click)="toggleAll()">{{collapseButtonText}}</button>
         </div>
 
-        <!-- Predavanja Section -->
+        
         <div *ngIf="isExpanded('predavanja')" class="card-body">
-            <ng-container *ngFor="let predavanje of predavanja">
-                <div *ngIf="!predavanje.passed" class="section-item">
-                    <div class="item-thumbnail">
-                        <i class="item-img pdf-img bi bi-file-earmark-arrow-down-fill"></i>
-                    </div>
-                    <div class="item-details">
-                        <div class="item-type">FILE</div>
-                        <i class="item-name" (click)="openFile(predavanje)">{{ predavanje?.name }}</i>
-                    </div>
-                </div>
-            </ng-container>
-
-            <div class="mt-3">
-                <div class="d-flex align-items-center justify-content-between">
-                    <span class="d-flex align-items-center" (click)="toggleSection('skrivenaPredavanja')">
-                        <i class="bi bi-eye-slash eye fs-2" *ngIf="!isExpanded('skrivenaPredavanja')"></i>
-                        <i class="bi bi-eye eye fs-2" *ngIf="isExpanded('skrivenaPredavanja')"> </i>
-                        <em>Hidden ({{passedPredavanja}} items)</em>
-                    </span>
-                </div>
+            <div  *ngIf="authService.isAdmin()" class="d-flex justify-content-start align-items-center mt-3 mb-3">
+                <button class="btn btn-primary" (click)="showCreateForm = true">Create new</button>
             </div>
-            <!-- Skrivena Section -->
-            <div *ngIf="isExpanded('skrivenaPredavanja')" class="card-body">
-                <ng-container *ngFor="let predavanje of predavanja">
-                    <div *ngIf="predavanje.passed" class="section-item">
+
+            <div *ngIf="showCreateForm" class="card p-3 mb-3">
+                <form (ngSubmit)="onSubmitCreateForm()" class="d-flex flex-column">
+                    <div class="mb-3">
+                        <label for="predavanjeName" class="form-label">Predavanje title</label>
+                        <input type="text" class="form-control" id="predavanjeName" [(ngModel)]="newPredavanje.name" name="name" required>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="predavanjeFile" class="form-label">Upload file</label>
+                        <input type="file" class="form-control" id="predavanjeFile" (change)="onFileSelected($event)" accept="application/pdf" required>
+                    </div>
+            
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary me-2" (click)="showCreateForm = false">Cancel</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+            <ng-container *ngFor="let predavanje of predavanja">
+                <div class="section-item d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
                         <div class="item-thumbnail">
                             <i class="item-img pdf-img bi bi-file-earmark-arrow-down-fill"></i>
                         </div>
@@ -47,12 +48,21 @@
                             <i class="item-name" (click)="openFile(predavanje)">{{ predavanje?.name }}</i>
                         </div>
                     </div>
-                </ng-container>
-            </div>
+
+                    <div *ngIf="authService.isAdmin()" class="ms-auto">
+                        <button class="btn btn-sm btn-warning me-2">
+                            <i class="bi bi-pencil-square"></i> 
+                        </button>
+                        <button class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash3-fill"></i> 
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
         </div>
     </div>
 
-
+    <!-- Vježbe Section -->
     <div class="card border-0 mb-3">
         <div class="card-header d-flex align-items-center justify-content-between" (click)="toggleSection('vjezbe')">
             <span class="d-flex align-items-center">
@@ -61,32 +71,16 @@
                 <strong>Vježbe</strong>
             </span>
         </div>
-        <div *ngIf="isExpanded('vjezbe')" class="card-body">
-            <ng-container *ngFor="let vjezba of vjezbe">
-                <div *ngIf="!vjezba.passed" class="section-item">
-                    <div class="item-thumbnail">
-                        <i class="item-img pdf-img bi bi-file-earmark-arrow-down-fill"></i>
-                    </div>
-                    <div class="item-details">
-                        <div class="item-type">FILE</div>
-                        <i class="item-name" (click)="openFile(vjezba)">{{ vjezba?.name }}</i>
-                    </div>
-                </div>
-            </ng-container>
 
-            <div class="mt-3">
-                <div class="d-flex align-items-center justify-content-between">
-                    <span class="d-flex align-items-center" (click)="toggleSection('skriveneVjezbe')">
-                        <i class="bi bi-eye-slash eye fs-2" *ngIf="!isExpanded('skriveneVjezbe')"></i>
-                        <i class="bi bi-eye eye fs-2" *ngIf="isExpanded('skriveneVjezbe')"> </i>
-                        <em>Hidden ({{ passedVjezbe}} items) </em>
-                    </span>
-                </div>
+        
+
+        <div *ngIf="isExpanded('vjezbe')" class="card-body">
+            <div  *ngIf="authService.isAdmin()" class="d-flex justify-content-start align-items-center mt-3 mb-3">
+                <button class="btn btn-primary" >Create new</button>
             </div>
-            <!-- Skrivena Section -->
-            <div *ngIf="isExpanded('skriveneVjezbe')" class="card-body">
-                <ng-container *ngFor="let vjezba of vjezbe">
-                    <div *ngIf="vjezba.passed" class="section-item">
+            <ng-container *ngFor="let vjezba of vjezbe">
+                <div class="section-item d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
                         <div class="item-thumbnail">
                             <i class="item-img pdf-img bi bi-file-earmark-arrow-down-fill"></i>
                         </div>
@@ -95,11 +89,21 @@
                             <i class="item-name" (click)="openFile(vjezba)">{{ vjezba?.name }}</i>
                         </div>
                     </div>
-                </ng-container>
-            </div>
+
+                    <div *ngIf="authService.isAdmin()" class="ms-auto">
+                        <button class="btn btn-sm btn-warning me-2">
+                            <i class="bi bi-pencil-square"></i> 
+                        </button>
+                        <button class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash3-fill"></i> 
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
         </div>
     </div>
 
+    <!-- Kvizovi Section -->
     <div class="card border-0 mb-3">
         <div class="card-header d-flex align-items-center justify-content-between" (click)="toggleSection('kvizovi')">
             <span class="d-flex align-items-center">
@@ -108,34 +112,45 @@
                 <strong>Kvizovi</strong>
             </span>
         </div>
+
         <div *ngIf="isExpanded('kvizovi')" class="card-body">
-            <div *ngFor="let quiz of quizzes" class="section-item d-flex justify-content-between align-items-center">
-                <div class="item-thumbnail">
-                    <img class="item-img quiz-img" src="../../../assets/quiz-icon.png" alt="Quiz Icon">
-                </div>
-                <div class="item-details flex-grow-1" (click)="quiz.score !== null ? openQuizReview(quiz) : openQuizModal(quiz)"                >
-                    <div class="item-type">QUIZ</div>
-                    <i class="item-name">{{ quiz.name }}</i>
-                </div>
-
-                <!-- Prikaz rezultata na desnoj strani -->
-                <div *ngIf="quiz.score !== null" class="quiz-result text-end ms-auto">
-                    <div class="score">
-                        Score: {{ quiz.score }}/{{ quiz.maxScore }}
-                    </div>
-
-                    <div *ngIf="quiz.score < quiz.minScore" class="failed text-center p-2 bg-danger text-white mt-2">
-                        FAILED
-                    </div>
-                    <div *ngIf="quiz.score >= quiz.minScore" class="passed text-center p-2 bg-success text-white mt-2">
-                        PASSED
-                    </div>
-                </div>
-
-
+            <div  *ngIf="authService.isAdmin()" class="d-flex justify-content-start align-items-center mt-3 mb-3">
+                <button class="btn btn-primary" >Create new</button>
             </div>
+            <ng-container *ngFor="let quiz of quizzes">
+                <div class="section-item d-flex justify-content-between align-items-center">
+                    <div class="item-thumbnail">
+                        <img class="item-img quiz-img" src="../../../assets/quiz-icon.png" alt="Quiz Icon">
+                    </div>
+                    <div class="item-details flex-grow-1" (click)="quiz.score !== null ? openQuizReview(quiz) : openQuizModal(quiz)">
+                        <div class="item-type">QUIZ</div>
+                        <i class="item-name">{{ quiz.name }}</i>
+                    </div>
 
+                    <!-- Prikaz rezultata na desnoj strani -->
+                    <div *ngIf="quiz.score !== null" class="quiz-result text-end ms-auto">
+                        <div class="score">
+                            Score: {{ quiz.score }}/{{ quiz.maxScore }}
+                        </div>
 
+                        <div *ngIf="quiz.score < quiz.minScore" class="failed text-center p-2 bg-danger text-white mt-2">
+                            FAILED
+                        </div>
+                        <div *ngIf="quiz.score >= quiz.minScore" class="passed text-center p-2 bg-success text-white mt-2">
+                            PASSED
+                        </div>
+                    </div>
+
+                    <div *ngIf="authService.isAdmin()" class="ms-auto">
+                        <button class="btn btn-sm btn-warning me-2">
+                            <i class="bi bi-pencil-square"></i> 
+                        </button>
+                        <button class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash3-fill"></i> 
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
         </div>
     </div>
 </div>

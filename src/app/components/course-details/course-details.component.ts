@@ -6,13 +6,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from '../../models/course.model';
 import { CourseService } from '../../services/course.service';
 import { QuizRetakeService } from '../../services/quiz-retake.service';
+import { AuthService } from '../../services/auth.service';
 @Component({
     selector: 'app-course-details',
     templateUrl: './course-details.component.html',
     styleUrl: './course-details.component.css'
 })
 export class CourseDetailsComponent implements OnInit {
-    constructor(public dialog: MatDialog, private quizService: QuizService, private courseService: CourseService, private route: ActivatedRoute, private router: Router, private quizRetakeService: QuizRetakeService) { }
+    constructor(public dialog: MatDialog, private quizService: QuizService, private courseService: CourseService,
+                private route: ActivatedRoute, private router: Router, private quizRetakeService: QuizRetakeService,
+                private authService: AuthService) { }
     quizzes = [];
     course: Course;
     predavanja: any[] = [];
@@ -25,6 +28,8 @@ export class CourseDetailsComponent implements OnInit {
         vjezbe: false,
         kvizovi: false
     };
+
+    showCreateForm = false;
 
     ngOnInit() {
         const id = +this.route.snapshot.paramMap.get('id');

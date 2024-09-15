@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { QuizService } from '../../services/quiz.service';
 import { NotificationService } from '../../services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-details',
@@ -21,7 +22,8 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<QuizDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private quizService: QuizService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {
     const id = data.quiz.id;
     this.quizService.getQuizContent(id).subscribe(data => {
@@ -83,6 +85,6 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
     const timeTaken = this.data.quiz.time * 60 - this.timeLeft
     this.quizService.submitQuiz(this.data.quiz.id, 1, this.answers, timeTaken).subscribe({});
     this.dialogRef.close();
-    this.notificationService.showSuccess('Quiz submitted successfully');
+    this.router.navigate([`/quiz/${this.data.quiz.id}/review`]);
   }
 }

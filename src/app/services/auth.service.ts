@@ -57,4 +57,8 @@ export class AuthService {
   getUserInfo() {
     return this.getDecodedToken();
   }
+
+  isAdmin() : boolean {
+    return true;
+  }
 }
