@@ -19,6 +19,10 @@ export class CourseService {
     return this.http.get<Course>(`http://localhost:3000/course/${id}`);
   }
 
+  createCourse(course: Course) : Observable<Course> {
+    return this.http.post<any>('http://localhost:3000/course', course);
+  }
+
   getMaterials(id: number) : Observable<any> {
     return this.http.get(`http://localhost:3000/course/${id}/materials`);
   }

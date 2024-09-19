@@ -30,11 +30,27 @@
             </select>
         </div>
     </div>
+    
+    <!-- Button to show the input form -->
+    <div class="row my-4">
+        <div class="col-4">
+            <button *ngIf="!showCourseInput && authService.isAdmin()" class="btn btn-primary" (click)="toggleCourseInput()">Create new</button>
+            
+            <!-- Input form to create course -->
+            <div *ngIf="showCourseInput" class="d-flex align-items-center">
+                <input class="form-control me-2" type="text" placeholder="Enter course title" [(ngModel)]="newCourseTitle">
+                <button class="btn btn-primary me-2" (click)="saveCourse()">Save</button>
+                <button class="btn btn-secondary" (click)="toggleCourseInput()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Courses listing -->
     <div class="row">
         <div class="col-md-4 course" *ngFor="let course of courses" (click)="navigateToCourse(course.id)">
             <div class="card course-box">
-                <img src="../../assets/course.jpg" alt="Course Image" class="course-img" >
-                <h3>{{course.name}}</h3>
+                <img src="../../assets/course.jpg" alt="Course Image" class="course-img">
+                <h3>{{ course.name }}</h3>
                 <p>2. semestar</p>
             </div>
         </div>

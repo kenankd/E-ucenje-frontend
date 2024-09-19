@@ -17,6 +17,10 @@ export class QuizService {
     return this.http.get(`http://localhost:3000/quiz/${id}/content`);
   }
 
+  createQuiz(quiz: any): Observable<any> {
+    return this.http.post('http://localhost:3000/quiz', quiz);
+  }
+
   submitQuiz(quizId: number, userId: number,  answers: any[], time: any): Observable<any> {
     return this.http.post(`http://localhost:3000/quiz/${quizId}/user/${userId}/submit`, { answers, time});
   }
@@ -25,8 +29,5 @@ export class QuizService {
     return this.http.get<QuizReview>(`http://localhost:3000/quiz/${id}/user/${userId}/review`);
   }
 
-  createQuiz(quiz: any): Observable<any> {
-    return this.http.post('http://localhost:3000/quiz', quiz);
-  }
 }
 
