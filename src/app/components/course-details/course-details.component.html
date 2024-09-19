@@ -19,18 +19,18 @@
             </div>
 
             <div *ngIf="showCreateForm" class="card p-3 mb-3">
-                <form (ngSubmit)="onSubmitCreateForm()" class="d-flex flex-column">
+                <form (ngSubmit)="onSubmitCreateMaterialForm('predavanje')" class="d-flex flex-column">
                     <div class="mb-3">
                         <label for="predavanjeName" class="form-label">Predavanje title</label>
-                        <input type="text" class="form-control" id="predavanjeName" [(ngModel)]="newPredavanje.name" name="name" required>
+                        <input type="text" class="form-control" id="predavanjeName" [(ngModel)]="newMaterial.name" name="name" required>
                     </div>
             
                     <div class="mb-3">
                         <label for="predavanjeFile" class="form-label">Upload file</label>
-                        <input type="file" class="form-control" id="predavanjeFile" (change)="onFileSelected($event)" accept="application/pdf" required>
+                        <input type="file" class="form-control" id="predavanjeFile" (change)="onFileSelected($event, 'predavanje')" accept="application/pdf" required>
                     </div>
             
-                    <div class="d-flex justify-content-end">
+                    <div class="d-flex">
                         <button type="button" class="btn btn-secondary me-2" (click)="showCreateForm = false">Cancel</button>
                         <button type="submit" class="btn btn-success">Submit</button>
                     </div>
@@ -53,7 +53,7 @@
                         <button class="btn btn-sm btn-warning me-2">
                             <i class="bi bi-pencil-square"></i> 
                         </button>
-                        <button class="btn btn-sm btn-danger">
+                        <button class="btn btn-sm btn-danger" (click)="deleteMaterial(predavanje)">
                             <i class="bi bi-trash3-fill"></i> 
                         </button>
                     </div>
@@ -76,7 +76,26 @@
 
         <div *ngIf="isExpanded('vjezbe')" class="card-body">
             <div  *ngIf="authService.isAdmin()" class="d-flex justify-content-start align-items-center mt-3 mb-3">
-                <button class="btn btn-primary" >Create new</button>
+                <button class="btn btn-primary" (click)="showCreateVjezbaForm = true">Create new</button>
+            </div>
+
+            <div *ngIf="showCreateVjezbaForm" class="card p-3 mb-3">
+                <form (ngSubmit)="onSubmitCreateMaterialForm('vjezba')" class="d-flex flex-column">
+                    <div class="mb-3">
+                        <label for="vjezbaName" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="vjezbaName" [(ngModel)]="newVjezba.name" name="name" required>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="vjezbaFile" class="form-label">Upload file</label>
+                        <input type="file" class="form-control" id="vjezbaFile" (change)="onFileSelected($event, 'vjezba')" accept="application/pdf" required>
+                    </div>
+            
+                    <div class="d-flex">
+                        <button type="button" class="btn btn-secondary me-2" (click)="showCreateVjezbaForm = false">Cancel</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
             </div>
             <ng-container *ngFor="let vjezba of vjezbe">
                 <div class="section-item d-flex justify-content-between">
@@ -94,7 +113,7 @@
                         <button class="btn btn-sm btn-warning me-2">
                             <i class="bi bi-pencil-square"></i> 
                         </button>
-                        <button class="btn btn-sm btn-danger">
+                        <button class="btn btn-sm btn-danger" (click)="deleteMaterial(vjezba)">
                             <i class="bi bi-trash3-fill"></i> 
                         </button>
                     </div>
@@ -115,7 +134,7 @@
 
         <div *ngIf="isExpanded('kvizovi')" class="card-body">
             <div  *ngIf="authService.isAdmin()" class="d-flex justify-content-start align-items-center mt-3 mb-3">
-                <button class="btn btn-primary" >Create new</button>
+                <button class="btn btn-primary" (click)="openCreateQuizModal()">Create new</button>
             </div>
             <ng-container *ngFor="let quiz of quizzes">
                 <div class="section-item d-flex justify-content-between align-items-center">
@@ -128,7 +147,7 @@
                     </div>
 
                     <!-- Prikaz rezultata na desnoj strani -->
-                    <div *ngIf="quiz.score !== null" class="quiz-result text-end ms-auto">
+                    <div *ngIf="quiz.score !== null && authService.isUser()" class="quiz-result text-end ms-auto">
                         <div class="score">
                             Score: {{ quiz.score }}/{{ quiz.maxScore }}
                         </div>
@@ -145,7 +164,7 @@
                         <button class="btn btn-sm btn-warning me-2">
                             <i class="bi bi-pencil-square"></i> 
                         </button>
-                        <button class="btn btn-sm btn-danger">
+                        <button class="btn btn-sm btn-danger" (click)="deleteQuiz(quiz)">
                             <i class="bi bi-trash3-fill"></i> 
                         </button>
                     </div>

@@ -10,8 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a routerLinkActive="active" routerLink="/home" class="nav-link" aria-current="page"
-                        href="#">Home</a>
+                    <a routerLinkActive="active" routerLink="/home" class="nav-link" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
                     <a routerLinkActive="active" routerLink="/mycourses" class="nav-link" href="#">My courses</a>
@@ -27,8 +26,8 @@
                 </a>
                 <div class="vertical-line mx-3 d-none d-lg-block"></div>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!isLoggedIn">
-                    <li class="nav-item" >
-                        <a class="nav-link" aria-current="page"  id="login" (click)="openLogin()">Log in</a>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" id="login" (click)="openLogin()">Log in</a>
                     </li>
                 </ul>
                 <li class="nav-item dropdown" *ngIf="isLoggedIn">
@@ -36,8 +35,9 @@
                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle me-2" style="font-size: 1.5rem; color: gray;"></i>
                         Welcome, {{ username }}
+                        <span *ngIf="authService.isAdmin()" class="badge bg-danger ms-2">ADMIN</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end"  aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
                     </ul>
                 </li>

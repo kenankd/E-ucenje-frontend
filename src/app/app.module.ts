@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule} from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { CoursesComponent } from './components/courses/courses.component';
@@ -12,11 +11,13 @@ import { QuizDetailsComponent } from './components/quiz-details/quiz-details.com
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthGuard } from './guards/auth.guard';
+
 import { QuizReviewComponent } from './components/quiz-review/quiz-review.component';
+import { CreateQuizComponent } from './components/create-quiz/create-quiz.component';
 
 const appRoutes : Routes = [
   {
@@ -49,7 +50,8 @@ const appRoutes : Routes = [
     CourseDetailsComponent,
     LoginComponent,
     QuizDetailsComponent,
-    QuizReviewComponent
+    QuizReviewComponent,
+    CreateQuizComponent
   ],
   imports: [
     BrowserModule,  
@@ -57,6 +59,7 @@ const appRoutes : Routes = [
     HttpClientModule,
     MatSnackBarModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   bootstrap: [AppComponent],

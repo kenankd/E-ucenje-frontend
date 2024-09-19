@@ -35,7 +35,7 @@ export class AuthService {
       }));
   }
 
-  private getDecodedToken(): { id: string; username: string } | null {
+  private getDecodedToken(): { id: string; username: string, role: string } | null {
     const token = localStorage.getItem(this.token);
     if (token) {
       try {
@@ -59,6 +59,10 @@ export class AuthService {
   }
 
   isAdmin() : boolean {
-    return true;
+    return this.getUserInfo()?.role === 'admin';
+  }
+
+  isUser() : boolean {
+    return this.getUserInfo()?.role === 'user';
   }
 }

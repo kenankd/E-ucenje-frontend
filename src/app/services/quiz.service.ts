@@ -24,5 +24,9 @@ export class QuizService {
   getQuizReview(id: number, userId: number): Observable<QuizReview> {
     return this.http.get<QuizReview>(`http://localhost:3000/quiz/${id}/user/${userId}/review`);
   }
+
+  createQuiz(quiz: any): Observable<any> {
+    return this.http.post('http://localhost:3000/quiz', quiz);
+  }
 }
 

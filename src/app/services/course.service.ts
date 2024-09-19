@@ -26,4 +26,17 @@ export class CourseService {
   getFile(id: number) : Observable<any> {
     return this.http.get(`http://localhost:3000/material/${id}/file`, {responseType: 'blob' as 'json'});
   }
+
+  postMaterial(material: any) : Observable<any> {
+    console.log(material);
+    return this.http.post(`http://localhost:3000/material`, material);
+  }
+
+  deleteMaterial(id: number) : Observable<any> {
+    return this.http.delete(`http://localhost:3000/material/${id}`);
+  }
+
+  deleteQuiz(id: number) : Observable<any> {
+    return this.http.delete(`http://localhost:3000/quiz/${id}`);
+  }
 }

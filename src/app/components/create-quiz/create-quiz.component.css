@@ -1,0 +1,9 @@
+.modal-dialog{ 
+    margin:0;
+}
+
+.modal-body{
+    max-height:70vh;
+    overflow-y: auto;
+}
+
