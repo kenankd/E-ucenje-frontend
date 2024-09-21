@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { QuizDetailsComponent } from '../quiz-details/quiz-details.component';
 import { QuizService } from '../../services/quiz.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,15 +8,17 @@ import { QuizRetakeService } from '../../services/quiz-retake.service';
 import { AuthService } from '../../services/auth.service';
 import { CreateQuizComponent } from '../create-quiz/create-quiz.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditQuizComponent } from '../edit-quiz/edit-quiz.component';
+import { DataService } from '../../services/data.service';
 @Component({
     selector: 'app-course-details',
     templateUrl: './course-details.component.html',
     styleUrl: './course-details.component.css'
 })
 export class CourseDetailsComponent implements OnInit {
-    constructor(public dialog: MatDialog, private quizService: QuizService, private courseService: CourseService,
+    constructor(private quizService: QuizService, private courseService: CourseService,
         private route: ActivatedRoute, private router: Router, private quizRetakeService: QuizRetakeService,
-        private authService: AuthService, private modalService : NgbModal) { }
+        private authService: AuthService, private modalService: NgbModal, private dataService: DataService) { }
     quizzes = [];
     course: Course;
     predavanja: any[] = [];
@@ -51,7 +52,7 @@ export class CourseDetailsComponent implements OnInit {
 
         });
 
-        this.quizService.getQuizzes().subscribe(
+        this.quizService.getQuizzes(id).subscribe(
             (data: any[]) => {
                 console.log(data);
                 this.quizzes = data;
@@ -62,38 +63,58 @@ export class CourseDetailsComponent implements OnInit {
             this.openQuizModal(this.quizzes[0])
         });
 
+        //event which waits on quiz create  to add to list
+        this.dataService.getDataEmitter().subscribe(data => {
+            this.quizzes.push(data);
+        });
+
+
     }
 
     openQuizModal(quiz: any): void {
-        console.log("opened")
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.width = '600px';
-        dialogConfig.height = '400px';
-        dialogConfig.panelClass = 'quiz-modal';
-        dialogConfig.data = { quiz };
-        console.log(dialogConfig.data);
-        const dialogRef = this.dialog.open(QuizDetailsComponent, dialogConfig);
-        dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-        });
+        console.log("kvizz", quiz)
+        const modalRef = this.modalService.open(QuizDetailsComponent, { size: 'lg', backdrop: 'static', centered: true, scrollable: true, keyboard: true });
+        modalRef.componentInstance.data = quiz;
+        console.log("kvizz", quiz)
+        modalRef.result.then(
+            (result) => {
+                console.log('Modal closed with result:', result);
+            },
+            (reason) => {
+                console.log('Modal dismissed with reason:', reason);
+            });
     }
 
     openCreateQuizModal(): void {
-        const modalRef = this.modalService.open(CreateQuizComponent, { size: 'lg', backdrop: 'static', centered:true, scrollable: true, keyboard: true });
+        const modalRef = this.modalService.open(CreateQuizComponent, { size: 'lg', backdrop: 'static', centered: true, scrollable: true, keyboard: true });
         modalRef.componentInstance.courseId = +this.route.snapshot.paramMap.get('id');
         modalRef.componentInstance.materials = [...this.predavanja, ...this.vjezbe];
         modalRef.result.then(
-          (result) => {
-            console.log('Modal closed with result:', result);
-          },
-          (reason) => {
-            console.log('Modal dismissed with reason:', reason);
-          });
+            (result) => {
+                console.log('Modal closed with result:', result);
+            },
+            (reason) => {
+                console.log('Modal dismissed with reason:', reason);
+            });
+    }
+
+    openEditQuizModal(quiz: any): void {
+        const modalRef = this.modalService.open(EditQuizComponent, { size: 'lg', backdrop: 'static', centered: true, scrollable: true, keyboard: true });
+        modalRef.componentInstance.courseId = +this.route.snapshot.paramMap.get('id');
+        modalRef.componentInstance.materials = [...this.predavanja, ...this.vjezbe];
+        modalRef.componentInstance.data = quiz;
+        modalRef.result.then(
+            (result) => {
+                console.log('Modal closed with result:', result);
+            },
+            (reason) => {
+                console.log('Modal dismissed with reason:', reason);
+            });
     }
 
     openQuizReview(quiz: any): void {
         console.log("aa")
-        this.router.navigate([`/quiz/${quiz.id}/review`]);
+        this.router.navigate([`/quiz/${quiz.id}/review`, { courseId: this.course.id }]);
     }
 
     openFile(material: any): void {
@@ -102,7 +123,7 @@ export class CourseDetailsComponent implements OnInit {
             const link = document.createElement('a');
             link.href = url;
             link.target = '_blank';
-            link.download = data + '.pdf'; // Ensure the file opens as PDF
+            link.download = material.name + '.pdf'; // Ensure the file opens as PDF
             link.click();
             URL.revokeObjectURL(url);
         });

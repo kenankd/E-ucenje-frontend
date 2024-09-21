@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@ang
 import { ActivatedRoute } from '@angular/router';
 import { QuizService } from '../../services/quiz.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-create-quiz',
@@ -19,7 +20,7 @@ export class CreateQuizComponent implements OnInit{
 
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private quizService : QuizService
-    ,private activeModal : NgbActiveModal) {}
+    ,private activeModal : NgbActiveModal, private dataService: DataService) {}
 
   ngOnInit() {
     this.quizForm = this.fb.group({
@@ -75,6 +76,7 @@ export class CreateQuizComponent implements OnInit{
         (data) => {
           console.log('Quiz created successfully');
           this.activeModal.close('Quiz created');
+          this.dataService.sendData(data);
         },
         (error) => {
           console.log('Error creating quiz');

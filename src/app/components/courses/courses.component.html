@@ -47,11 +47,16 @@
     
     <!-- Courses listing -->
     <div class="row">
-        <div class="col-md-4 course" *ngFor="let course of courses" (click)="navigateToCourse(course.id)">
+        <div class="col-md-4 course" *ngFor="let course of courses">
             <div class="card course-box">
-                <img src="../../assets/course.jpg" alt="Course Image" class="course-img">
-                <h3>{{ course.name }}</h3>
+                <img src="../../assets/course.jpg" alt="Course Image" class="course-img" (click)="navigateToCourse(course.id)">
+                <h3 (click)="navigateToCourse(course.id)">{{ course.name }}</h3>
                 <p>2. semestar</p>
+
+                <button *ngIf="authService.isAdmin()" class="btn btn-sm btn-danger position-absolute bottom-0 end-0 m-2" style="padding: 10px 15px; font-size: 1.2rem;"
+                 (click)="deleteCourse(course)">
+                    <i class="bi bi-trash3-fill"></i> 
+                </button>
             </div>
         </div>
     </div>

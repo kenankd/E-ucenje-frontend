@@ -12,9 +12,9 @@
             <button class="btn btn-outline-secondary" (click)="toggleAll()">{{collapseButtonText}}</button>
         </div>
 
-        
+
         <div *ngIf="isExpanded('predavanja')" class="card-body">
-            <div  *ngIf="authService.isAdmin()" class="d-flex justify-content-start align-items-center mt-3 mb-3">
+            <div *ngIf="authService.isAdmin()" class="d-flex justify-content-start align-items-center mt-3 mb-3">
                 <button class="btn btn-primary" (click)="showCreateForm = true">Create new</button>
             </div>
 
@@ -22,16 +22,19 @@
                 <form (ngSubmit)="onSubmitCreateMaterialForm('predavanje')" class="d-flex flex-column">
                     <div class="mb-3">
                         <label for="predavanjeName" class="form-label">Predavanje title</label>
-                        <input type="text" class="form-control" id="predavanjeName" [(ngModel)]="newMaterial.name" name="name" required>
+                        <input type="text" class="form-control" id="predavanjeName" [(ngModel)]="newMaterial.name"
+                            name="name" required>
                     </div>
-            
+
                     <div class="mb-3">
                         <label for="predavanjeFile" class="form-label">Upload file</label>
-                        <input type="file" class="form-control" id="predavanjeFile" (change)="onFileSelected($event, 'predavanje')" accept="application/pdf" required>
+                        <input type="file" class="form-control" id="predavanjeFile"
+                            (change)="onFileSelected($event, 'predavanje')" accept="application/pdf" required>
                     </div>
-            
+
                     <div class="d-flex">
-                        <button type="button" class="btn btn-secondary me-2" (click)="showCreateForm = false">Cancel</button>
+                        <button type="button" class="btn btn-secondary me-2"
+                            (click)="showCreateForm = false">Cancel</button>
                         <button type="submit" class="btn btn-success">Submit</button>
                     </div>
                 </form>
@@ -51,14 +54,38 @@
 
                     <div *ngIf="authService.isAdmin()" class="ms-auto">
                         <button class="btn btn-sm btn-warning me-2">
-                            <i class="bi bi-pencil-square"></i> 
+                            <i class="bi bi-pencil-square"></i>
                         </button>
                         <button class="btn btn-sm btn-danger" (click)="deleteMaterial(predavanje)">
-                            <i class="bi bi-trash3-fill"></i> 
+                            <i class="bi bi-trash3-fill"></i>
                         </button>
                     </div>
                 </div>
             </ng-container>
+
+            <div class="mt-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <span class="d-flex align-items-center" (click)="toggleSection('skrivenaPredavanja')">
+                        <i class="bi bi-eye-slash eye fs-2" *ngIf="!isExpanded('skrivenaPredavanja')"></i>
+                        <i class="bi bi-eye eye fs-2" *ngIf="isExpanded('skrivenaPredavanja')"> </i>
+                        <em>Hidden ({{passedPredavanja}} items)</em>
+                    </span>
+                </div>
+            </div>
+            <!-- Skrivena Section -->
+            <div *ngIf="isExpanded('skrivenaPredavanja')" class="card-body">
+                <ng-container *ngFor="let predavanje of predavanja">
+                    <div *ngIf="predavanje.passed" class="section-item">
+                        <div class="item-thumbnail">
+                            <i class="item-img pdf-img bi bi-file-earmark-arrow-down-fill"></i>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-type">FILE</div>
+                            <i class="item-name" (click)="openFile(predavanje)">{{ predavanje?.name }}</i>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
         </div>
     </div>
 
@@ -72,10 +99,10 @@
             </span>
         </div>
 
-        
+
 
         <div *ngIf="isExpanded('vjezbe')" class="card-body">
-            <div  *ngIf="authService.isAdmin()" class="d-flex justify-content-start align-items-center mt-3 mb-3">
+            <div *ngIf="authService.isAdmin()" class="d-flex justify-content-start align-items-center mt-3 mb-3">
                 <button class="btn btn-primary" (click)="showCreateVjezbaForm = true">Create new</button>
             </div>
 
@@ -83,16 +110,19 @@
                 <form (ngSubmit)="onSubmitCreateMaterialForm('vjezba')" class="d-flex flex-column">
                     <div class="mb-3">
                         <label for="vjezbaName" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="vjezbaName" [(ngModel)]="newVjezba.name" name="name" required>
+                        <input type="text" class="form-control" id="vjezbaName" [(ngModel)]="newVjezba.name" name="name"
+                            required>
                     </div>
-            
+
                     <div class="mb-3">
                         <label for="vjezbaFile" class="form-label">Upload file</label>
-                        <input type="file" class="form-control" id="vjezbaFile" (change)="onFileSelected($event, 'vjezba')" accept="application/pdf" required>
+                        <input type="file" class="form-control" id="vjezbaFile"
+                            (change)="onFileSelected($event, 'vjezba')" accept="application/pdf" required>
                     </div>
-            
+
                     <div class="d-flex">
-                        <button type="button" class="btn btn-secondary me-2" (click)="showCreateVjezbaForm = false">Cancel</button>
+                        <button type="button" class="btn btn-secondary me-2"
+                            (click)="showCreateVjezbaForm = false">Cancel</button>
                         <button type="submit" class="btn btn-success">Submit</button>
                     </div>
                 </form>
@@ -111,14 +141,38 @@
 
                     <div *ngIf="authService.isAdmin()" class="ms-auto">
                         <button class="btn btn-sm btn-warning me-2">
-                            <i class="bi bi-pencil-square"></i> 
+                            <i class="bi bi-pencil-square"></i>
                         </button>
                         <button class="btn btn-sm btn-danger" (click)="deleteMaterial(vjezba)">
-                            <i class="bi bi-trash3-fill"></i> 
+                            <i class="bi bi-trash3-fill"></i>
                         </button>
                     </div>
                 </div>
             </ng-container>
+
+            <div class="mt-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <span class="d-flex align-items-center" (click)="toggleSection('skriveneVjezbe')">
+                        <i class="bi bi-eye-slash eye fs-2" *ngIf="!isExpanded('skriveneVjezbe')"></i>
+                        <i class="bi bi-eye eye fs-2" *ngIf="isExpanded('skriveneVjezbe')"> </i>
+                        <em>Hidden ({{ passedVjezbe}} items) </em>
+                    </span>
+                </div>
+            </div>
+            <!-- Skrivena Section -->
+            <div *ngIf="isExpanded('skriveneVjezbe')" class="card-body">
+                <ng-container *ngFor="let vjezba of vjezbe">
+                    <div *ngIf="vjezba.passed" class="section-item">
+                        <div class="item-thumbnail">
+                            <i class="item-img pdf-img bi bi-file-earmark-arrow-down-fill"></i>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-type">FILE</div>
+                            <i class="item-name" (click)="openFile(vjezba)">{{ vjezba?.name }}</i>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
         </div>
     </div>
 
@@ -133,7 +187,7 @@
         </div>
 
         <div *ngIf="isExpanded('kvizovi')" class="card-body">
-            <div  *ngIf="authService.isAdmin()" class="d-flex justify-content-start align-items-center mt-3 mb-3">
+            <div *ngIf="authService.isAdmin()" class="d-flex justify-content-start align-items-center mt-3 mb-3">
                 <button class="btn btn-primary" (click)="openCreateQuizModal()">Create new</button>
             </div>
             <ng-container *ngFor="let quiz of quizzes">
@@ -141,7 +195,8 @@
                     <div class="item-thumbnail">
                         <img class="item-img quiz-img" src="../../../assets/quiz-icon.png" alt="Quiz Icon">
                     </div>
-                    <div class="item-details flex-grow-1" (click)="quiz.score !== null ? openQuizReview(quiz) : openQuizModal(quiz)">
+                    <div class="item-details flex-grow-1"
+                        (click)="quiz.score !== null ? openQuizReview(quiz) : openQuizModal(quiz)">
                         <div class="item-type">QUIZ</div>
                         <i class="item-name">{{ quiz.name }}</i>
                     </div>
@@ -152,20 +207,22 @@
                             Score: {{ quiz.score }}/{{ quiz.maxScore }}
                         </div>
 
-                        <div *ngIf="quiz.score < quiz.minScore" class="failed text-center p-2 bg-danger text-white mt-2">
+                        <div *ngIf="quiz.score < quiz.minScore"
+                            class="failed text-center p-2 bg-danger text-white mt-2">
                             FAILED
                         </div>
-                        <div *ngIf="quiz.score >= quiz.minScore" class="passed text-center p-2 bg-success text-white mt-2">
+                        <div *ngIf="quiz.score >= quiz.minScore"
+                            class="passed text-center p-2 bg-success text-white mt-2">
                             PASSED
                         </div>
                     </div>
 
                     <div *ngIf="authService.isAdmin()" class="ms-auto">
-                        <button class="btn btn-sm btn-warning me-2">
-                            <i class="bi bi-pencil-square"></i> 
+                        <button class="btn btn-sm btn-warning me-2" (click)="openEditQuizModal(quiz)">
+                            <i class="bi bi-pencil-square"></i>
                         </button>
                         <button class="btn btn-sm btn-danger" (click)="deleteQuiz(quiz)">
-                            <i class="bi bi-trash3-fill"></i> 
+                            <i class="bi bi-trash3-fill"></i>
                         </button>
                     </div>
                 </div>

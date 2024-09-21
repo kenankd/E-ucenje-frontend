@@ -1,28 +1,42 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="d-flex justify-content-between align-items-center mb-3" style="margin-top:0.7rem;">
-        <img class="quiz-img" src="../../../assets/quiz-icon.png" alt="" srcset="">
-        <h3 style=" margin-right: auto; margin-left:3px;">Pitanje {{ currentQuestionIndex + 1 }}</h3>
-        <span class="border border-danger" style="padding: 0.3rem;">
-          Preostalo vrijeme: {{ formatTime(timeLeft) }}
-        </span>
+<!-- Quiz Modal -->
+<div  tabindex="-1" aria-labelledby="quizModalLabel" aria-hidden="true" #quizModal>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="quizModalLabel">{{data.name}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeQuizModal()"></button>
       </div>
-      <div class="card">
-        <div class="card-header">{{ question?.text }}?</div>
-        <div class="card-body">
-          <div *ngFor="let answer of question?.Answers" class="form-check">
-            <input class="form-check-input" type="radio" name="answer" id="answerA" value="optionA" (change)="selectAnswer(answer)">
-            <label class="form-check-label">
-              {{ answer.text }}
-            </label>
+      <div class="modal-body">
+        <!-- Quiz Content -->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="d-flex justify-content-between align-items-center mb-3" style="margin-top:0.7rem;">
+                <img class="quiz-img" src="../../../assets/quiz-icon.png" alt="" srcset="">
+                <h3 style="margin-right: auto; margin-left:3px;">Pitanje {{ currentQuestionIndex + 1 }}</h3>
+                <span class="border border-danger" style="padding: 0.3rem;">
+                  Preostalo vrijeme: {{ formatTime(timeLeft) }}
+                </span>
+              </div>
+              <div class="card">
+                <div class="card-header">{{ question?.text }}?</div>
+                <div class="card-body">
+                  <div *ngFor="let answer of question?.Answers" class="form-check">
+                    <input class="form-check-input" type="radio" name="answer" id="answerA" value="optionA" (change)="selectAnswer(answer)">
+                    <label class="form-check-label">
+                      {{ answer.text }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end mt-3">
+                <button class="btn btn-primary" (click)="currentQuestionIndex === questions?.length - 1 ? submitQuiz() : nextQuestion()">
+                  {{ currentQuestionIndex === questions?.length - 1 ? 'Finish' : 'Next page' }}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="d-flex justify-content-end mt-3">
-        <button class="btn btn-primary" (click)="currentQuestionIndex === questions?.length - 1 ? submitQuiz() : nextQuestion()">
-          {{ currentQuestionIndex === questions?.length - 1 ? 'Finish' : 'Next page' }}
-        </button>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { QuizRetakeService } from '../../services/quiz-retake.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,16 +15,18 @@ import { QuizReviewAnswer } from '../../models/quiz-review-answer.model';
 })
 export class QuizReviewComponent implements OnInit {
 
-  constructor(private location: Location, private quizService: QuizService, private quizRetakeService: QuizRetakeService, private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private location: Location, private quizService: QuizService, private quizRetakeService: QuizRetakeService, private authService: AuthService,
+     private router: Router, private route: ActivatedRoute, private cd: ChangeDetectorRef) { }
 
-  quizReview: QuizReview
+  quizReview: QuizReview = null;
   quizId = +this.route.snapshot.paramMap.get('id');
   user = this.authService.getUserInfo()
-
+  isLoading = true;
   ngOnInit(): void {
-
     this.quizService.getQuizReview(this.quizId, +this.user.id).subscribe(data => {
       this.quizReview = data
+      this.isLoading = false
+      this.cd.detectChanges();
     })
   }
 
@@ -34,10 +36,9 @@ export class QuizReviewComponent implements OnInit {
 
   retakeQuiz(): void {
     this.quizRetakeService.notifyRetakeQuiz()
-    this.router.navigate(["/course/1"])
+    var courseId = +this.route.snapshot.paramMap.get('courseId')
+    this.router.navigate([`/course/${courseId}`])
 
-    //TODO
-    //FIX 1 HARDCODED COURSE ID
   }
 
   isAnswerCorrect(question: QuizReviewQuestion) {

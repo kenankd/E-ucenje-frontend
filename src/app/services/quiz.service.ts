@@ -9,8 +9,8 @@ import { QuizReview } from '../models/quiz-review.model';
 export class QuizService {
   constructor(private http: HttpClient) { }
 
-  getQuizzes(): Observable<any> {
-    return this.http.get('http://localhost:3000/quiz/1');
+  getQuizzes(id: number): Observable<any> {
+    return this.http.get(`http://localhost:3000/quiz/${id}`);
   }
 
   getQuizContent(id: number): Observable<any> {
@@ -19,6 +19,10 @@ export class QuizService {
 
   createQuiz(quiz: any): Observable<any> {
     return this.http.post('http://localhost:3000/quiz', quiz);
+  }
+
+  editQuiz(quiz: any): Observable<any> {
+    return this.http.put(`http://localhost:3000/quiz/${quiz.id}`, quiz);
   }
 
   submitQuiz(quizId: number, userId: number,  answers: any[], time: any): Observable<any> {

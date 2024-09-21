@@ -23,6 +23,10 @@ export class CourseService {
     return this.http.post<any>('http://localhost:3000/course', course);
   }
 
+  deleteCourse(id: number) : Observable<any> {
+    return this.http.delete(`http://localhost:3000/course/${id}`);
+  }
+
   getMaterials(id: number) : Observable<any> {
     return this.http.get(`http://localhost:3000/course/${id}/materials`);
   }

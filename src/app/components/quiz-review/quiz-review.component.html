@@ -1,7 +1,7 @@
-<div class="container mt-4">
+<div class="container mt-4" *ngIf="!isLoading">
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title mb-0">{{quizReview.quizName}} Review</h5>
+            <h5 class="card-title mb-0">{{quizReview?.quizName}} Review</h5>
         </div>
         <div class="card-body">
             <!-- Exam details table -->
@@ -9,7 +9,7 @@
                 <tbody>
                     <tr>
                         <td class="label-cell">Started on</td>
-                        <td>{{ quizReview.startedOn | date:'fullDate'}} at {{quizReview.startedOn | date:'shortTime' }}</td>
+                        <td>{{ quizReview?.startedOn | date:'fullDate'}} at {{quizReview?.startedOn | date:'shortTime' }}</td>
                     </tr>
                     <tr>
                         <td class="label-cell">Time taken</td>
@@ -21,7 +21,7 @@
                     </tr>
                     <tr>
                         <td class="label-cell">State</td>
-                        <td>{{quizReview.state}}</td>
+                        <td>{{quizReview?.state}}</td>
                     </tr>
                     <tr>
                         <td class="label-cell">Predavanje 1:</td>
@@ -35,7 +35,7 @@
             </table>
 
             <!-- Loop through questions -->
-            <div *ngFor="let question of quizReview.review; let i = index" class="question-section mb-4 p-3 rounded">
+            <div *ngFor="let question of quizReview?.review; let i = index" class="question-section mb-4 p-3 rounded">
                 <div class="row">
                     <!-- Left side box -->
                     <div class="col-md-3">
@@ -58,9 +58,6 @@
                                 <span *ngIf="!answer.isCorrect && answer.isSelected" class="text-danger">✘</span>
                             </li>
                         </ul>
-                        <p *ngIf="!isAnswerCorrect(question)" class="correct-answer">
-                            <em>The correct answer is: {{ question.correctAnswer }}</em>
-                        </p>
                     </div>
                 </div>
             </div>

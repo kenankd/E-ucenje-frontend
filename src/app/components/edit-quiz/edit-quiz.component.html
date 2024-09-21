@@ -1,0 +1,88 @@
+<!-- Modal for Creating Quiz -->
+<div *ngIf="data.questions"id="editQuizModal" tabindex="-1" aria-labelledby="editQuizModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editQuizModalLabel">Edit Quiz</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="dismissModal()"></button>
+            </div>
+            <form [formGroup]="quizForm" (ngSubmit)="onSubmitEditQuiz()">
+                <div class="modal-body">
+
+                    <!-- Quiz Details -->
+                    <div class="mb-3">
+                        <label for="quizName">Quiz Name</label>
+                        <input type="text" id="quizName" class="form-control" formControlName="name"
+                            placeholder="Enter quiz name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="quizTime">Time (minutes)</label>
+                        <input type="number" id="quizTime" class="form-control" formControlName="time"
+                            placeholder="Enter time in minutes">
+                    </div>
+                    <div class="mb-3">
+                        <label for="minScore">Minimum Score</label>
+                        <input type="number" id="minScore" class="form-control" formControlName="minScore"
+                            placeholder="Enter minimum score">
+                    </div>
+
+                    <!-- Questions Section -->
+                    <div formArrayName="questions">
+                        <div *ngFor="let question of questions.controls; let i = index" [formGroupName]="i"
+                            class="card mb-3">
+                            <div class="card-header d-flex justify-content-between">
+                                <strong>Question {{ i + 1 }}</strong>
+                                <button class="btn btn-sm btn-danger" (click)="removeQuestion(i)">
+                                    <i class="bi bi-trash3-fill"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label>Question</label>
+                                    <input type="text" class="form-control" formControlName="text"
+                                        placeholder="Enter question text">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Points</label>
+                                    <input type="number" class="form-control" formControlName="points">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Related to Material</label>
+                                    <select class="form-control" formControlName="materialId">
+                                        <option *ngFor="let material of materials" [value]="material.id">{{
+                                            material.name }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- Answers Section -->
+                                <div formArrayName="answers">
+                                    <div *ngFor="let answer of question.get('answers').controls; let j = index"
+                                        [formGroupName]="j" class="input-group mb-2">
+                                        <input type="text" class="form-control" formControlName="text"
+                                            placeholder="Answer text">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" formControlName="correct">Correct
+                                        </div>
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash3-fill" (click)="removeAnswer(i, j)"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-sm" (click)="addAnswer(i)">Add
+                                    Answer</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-sm" (click)="addQuestion()">Add Question</button>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="dismissModal()">Close</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

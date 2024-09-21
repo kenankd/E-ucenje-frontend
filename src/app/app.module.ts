@@ -18,6 +18,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 import { QuizReviewComponent } from './components/quiz-review/quiz-review.component';
 import { CreateQuizComponent } from './components/create-quiz/create-quiz.component';
+import { EditQuizComponent } from './components/edit-quiz/edit-quiz.component';
 
 const appRoutes : Routes = [
   {
@@ -51,7 +52,8 @@ const appRoutes : Routes = [
     LoginComponent,
     QuizDetailsComponent,
     QuizReviewComponent,
-    CreateQuizComponent
+    CreateQuizComponent,
+    EditQuizComponent
   ],
   imports: [
     BrowserModule,  
